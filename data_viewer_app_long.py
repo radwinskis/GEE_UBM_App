@@ -253,6 +253,9 @@ if target_id:
     #         st.session_state['selected_id'] = clicked_id
     #         st.session_state['last_map_clicked'] = clicked_id
 
+st.header("📈 Interactive Timeseries of UBM Ensemble Runs", divider='rainbow', text_alignment='center')
+st.markdown("This figure is interactive. Hover over lines to see details, zoom in/out, and pan around. Use the legend to toggle ensemble members on/off. Gray lines are individual ensemble runs while the pink line is the ensemble mean.", text_alignment='center')
+
 # --- PLOTTING SECTION ---
 with st.container(horizontal=False, horizontal_alignment='center',  width='stretch'):
 

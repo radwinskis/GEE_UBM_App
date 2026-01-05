@@ -25,26 +25,36 @@ try:
     # 1. Get the raw string from secrets
     key_content = st.secrets["textkey"]
     
-    # 2. Parse JSON with 'strict=False' to allow control characters
+    # 2. Parse JSON with 'strict=False'
     key_dict = json.loads(key_content, strict=False)
     
-    # 3. Initialize Earth Engine
-    credentials = service_account.Credentials.from_service_account_info(key_dict)
+    # 3. Define the mandatory Earth Engine Scope
+    #    This tells Google we want access to GEE specifically
+    scopes = ['https://www.googleapis.com/auth/earthengine']
+    
+    # 4. Create Credentials WITH Scopes
+    credentials = service_account.Credentials.from_service_account_info(
+        key_dict, 
+        scopes=scopes
+    )
+    
+    # 5. Initialize
     ee.Initialize(credentials=credentials)
     
 except Exception as e:
     # Fallback for Local Development
-    # We check if the file exists before blindly trying to open it
-    import os
     local_key_path = 'C:\\Users\\mradwin\\ut-gee-ugs-bsf-dev-53dcc5d729e0.json'
     
     if os.path.exists(local_key_path):
-        credentials = service_account.Credentials.from_service_account_file(local_key_path)
+        # The older helper function 'ee.ServiceAccountCredentials' automatically handles scopes
+        # so we don't need to manually add them here.
+        credentials = ee.ServiceAccountCredentials(
+            'localpythonscripts@ut-gee-ugs-bsf-dev.iam.gserviceaccount.com', 
+            local_key_path
+        )
         ee.Initialize(credentials=credentials)
     else:
-        # If both fail, stop the app and show the specific error
         st.error("🚨 Authentication Error")
-        st.error(f"Could not load secrets and could not find local file.")
         st.code(f"Detailed Error: {e}")
         st.stop()
 

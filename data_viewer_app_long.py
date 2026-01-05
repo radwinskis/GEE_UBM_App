@@ -85,11 +85,11 @@ with st.container(width='stretch', horizontal_alignment='center'):
 with st.container():
     # st.title("🌊 Utah Watersheds Explorer")
     st.header("⚖️ Utah Basin Model (UBM) Soil Water Balance Demo App (v1.0)", divider='rainbow')
-    st.markdown("Developed by Mark Radwin at the Utah Geological Survey. Contact: mradwin@utah.gov", text_alignment='center')
+    st.markdown("Developed by Mark Radwin at the Utah Geological Survey. Contact: mradwin@utah.gov GitHub: https://github.com/radwinskis/GEE_UBM", text_alignment='center')
     st.markdown("""
     **Welcome.** This app helps to visualize UBM ensemble runs across Utah. 
     Select a region below to generate the ensemble time series, or scroll down to view spatial distribution maps.
-    """)
+    """, text_alignment='center')
     # st.header('', divider='rainbow', text_alignment='center')
     # st.divider()
 

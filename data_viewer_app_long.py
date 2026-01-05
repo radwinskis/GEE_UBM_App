@@ -79,10 +79,13 @@ st.markdown(
     unsafe_allow_html=True
 )
 
+st.logo('UGS-logo-large.png', size="medium")
+
 # --- SECTION 1: INFO SNIPPET ---
 with st.container():
     # st.title("🌊 Utah Watersheds Explorer")
     st.header("⚖️ Utah Basin Model (UBM) Soil Water Balance Demo App (v1.0)", divider='rainbow')
+    st.markdown("Developed by Mark Radwin at the Utah Geological Survey. Contact: mradwin@utah.gov", text_alignment='center')
     st.markdown("""
     **Welcome.** This app helps to visualize UBM ensemble runs across Utah. 
     Select a region below to generate the ensemble time series, or scroll down to view spatial distribution maps.

@@ -236,12 +236,13 @@ with st.container(horizontal=False, horizontal_alignment='center',  width='stret
         current_selection = st.session_state['selected_id']
         current_selection_filtered = current_selection.replace(',', '').replace("'", "").replace(" ", "_").replace("-", "_") .replace("__", "_") 
         
-        directory = 'C:\\Users\\mradwin\\Documents\\Utah Soil Water Balance\\Zonal_Stats_Timeseries\\All_Watersheds\\'
+        # directory = 'C:\\Users\\mradwin\\Documents\\Utah Soil Water Balance\\Zonal_Stats_Timeseries\\All_Watersheds\\'
+        directory = 'Zonal_Stats\\'
 
         if current_selection:
             # st.subheader(f"Data for: {current_selection} AKA {current_selection_filtered}")
             
-            directory = 'C:\\Users\\mradwin\\Documents\\Utah Soil Water Balance\\Zonal_Stats_Timeseries\\All_Watersheds\\'
+            directory = 'Zonal_Stats\\'
             watershed = current_selection_filtered
             watershed_name = watershed.replace('_', ' ')
             folder_path = directory + watershed + '\\'

@@ -22,34 +22,31 @@ import json
 # credentials = ee.ServiceAccountCredentials(service_account, 'C:\\Users\\mradwin\\ut-gee-ugs-bsf-dev-53dcc5d729e0.json')
 # ee.Initialize(credentials=credentials)
 try:
+    # 1. Get the raw string from secrets
     key_content = st.secrets["textkey"]
-    # Clean up: sometimes copy-pasting adds invisible formatting
-    key_content = key_content.strip() 
     
-    key_dict = json.loads(key_content)
+    # 2. Parse JSON with 'strict=False' to allow control characters
+    key_dict = json.loads(key_content, strict=False)
+    
+    # 3. Initialize Earth Engine
     credentials = service_account.Credentials.from_service_account_info(key_dict)
     ee.Initialize(credentials=credentials)
-    st.success("✅ Authenticated via Secrets")
-
+    
 except Exception as e:
-    # 2. Fallback to Local File (Development)
-    # We check if the file actually exists to avoid the FileNotFoundError crash
+    # Fallback for Local Development
+    # We check if the file exists before blindly trying to open it
+    import os
     local_key_path = 'C:\\Users\\mradwin\\ut-gee-ugs-bsf-dev-53dcc5d729e0.json'
     
     if os.path.exists(local_key_path):
-        try:
-            # We use the explicit service_account library here too for consistency
-            credentials = service_account.Credentials.from_service_account_file(local_key_path)
-            ee.Initialize(credentials=credentials)
-            print("Authenticated via Local File")
-        except Exception as local_e:
-             st.error(f"Local authentication failed: {local_e}")
+        credentials = service_account.Credentials.from_service_account_file(local_key_path)
+        ee.Initialize(credentials=credentials)
     else:
-        # If we are on the server and secrets failed, we are stuck.
-        # Print the original secret error so we can debug it.
-        st.error("🚨 Authentication Failed.")
-        st.error(f"Secrets Error: {e}")
-        st.warning("Make sure your 'textkey' in Streamlit Secrets is valid JSON (no actual line breaks in private_key).")
+        # If both fail, stop the app and show the specific error
+        st.error("🚨 Authentication Error")
+        st.error(f"Could not load secrets and could not find local file.")
+        st.code(f"Detailed Error: {e}")
+        st.stop()
 
 st.set_page_config(layout="wide", page_title="UBM App", page_icon="⚖️") # Use full screen width
 

@@ -78,8 +78,8 @@ st.markdown(
     """,
     unsafe_allow_html=True
 )
-
-st.logo('UGS-logo-large.png', size="medium")
+with st.container(width='stretch', horizontal_alignment='center'):
+    st.logo('UGS-logo-large.png', size="large")
 
 # --- SECTION 1: INFO SNIPPET ---
 with st.container():

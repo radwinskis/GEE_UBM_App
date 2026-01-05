@@ -79,7 +79,7 @@ st.markdown(
     unsafe_allow_html=True
 )
 with st.container(width='stretch', horizontal_alignment='center'):
-    st.logo('UGS-logo-large.png', size="large")
+    st.logo('UGS-logo-large.png', size="large", link='https://geology.utah.gov/')
 
 # --- SECTION 1: INFO SNIPPET ---
 with st.container():

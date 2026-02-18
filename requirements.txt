@@ -8,5 +8,5 @@ shapely
 numpy
 geemap==0.36.3
 xyzservices==2025.4.0
-earthengine-api
+earthengine-api==1.6.10
 radgeetoolbox

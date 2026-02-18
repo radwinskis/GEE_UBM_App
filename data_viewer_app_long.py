@@ -11,6 +11,9 @@ import pandas as pd
 import plotly.graph_objects as go
 from plotly.subplots import make_subplots
 import os
+import builtins
+from typing import Optional
+from pathlib import Path
 import geemap.foliumap as geemap
 from geemap import basemaps
 import ee
@@ -162,9 +165,13 @@ def calculate_climatological_anomaly(
     
     return ee.ImageCollection(processing_col.map(compute_anomaly))
 
+builtins.Optional = Optional
+
 st.set_page_config(layout="wide", page_title="UBM App", page_icon="⚖️") # Use full screen width
 
-st.image('Flaming_Gorge_Cropped_With_Logo.jpg', use_container_width=True)
+banner_path = Path(__file__).with_name("Flaming_Gorge_Cropped_With_Logo.JPG")
+if banner_path.exists():
+    st.image(str(banner_path), width="stretch")
 
 st.markdown(
     """

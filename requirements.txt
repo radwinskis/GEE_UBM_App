@@ -6,6 +6,7 @@ geopandas
 streamlit-folium
 shapely
 numpy
-geemap
+geemap==0.36.3
+xyzservices==2025.4.0
 earthengine-api
 radgeetoolbox
